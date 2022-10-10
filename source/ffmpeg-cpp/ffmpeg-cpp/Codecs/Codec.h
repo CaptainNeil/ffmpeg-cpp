@@ -1,41 +1,42 @@
-#pragma once
+﻿#pragma once
 
 #include "ffmpeg.h"
 #include "std.h"
 
 #include "OpenCodec.h"
 
+
 namespace ffmpegcpp
 {
 
-	class Codec
-	{
-	public:
+    class Codec
+    {
+    public:
 
-		Codec(const char* codecName);
-		Codec(AVCodecID codecId);
-		virtual ~Codec();
+        Codec(const char* codecName);
+        Codec(AVCodecID codecId);
+        virtual ~Codec();
 
-		void SetOption(const char* name, const char* value);
-		void SetOption(const char* name, int value);
-		void SetOption(const char* name, double value);
+        void SetOption(const char* name, const char* value);
+        void SetOption(const char* name, int value);
+        void SetOption(const char* name, double value);
 
-		void SetGenericOption(const char* name, const char* value);
+        void SetGenericOption(const char* name, const char* value);
 
-		void SetGlobalContainerHeader(); // used by the Muxer for configuration purposes
+        void SetGlobalContainerHeader(); // used by the Muxer for configuration purposes
 
-	protected:
+    protected:
 
-		AVCodecContext* codecContext = nullptr;
+        AVCodecContext* codecContext = nullptr;
 
-		OpenCodec* Open();
+        OpenCodec* Open();
 
-	private:
+    private:
 
-		void CleanUp();
+        void CleanUp();
 
-		AVCodecContext* LoadContext(AVCodec* codec);
+        AVCodecContext* LoadContext(AVCodec* codec);
 
-		bool opened = false;
-	};
+        bool opened = false;
+    };
 }
